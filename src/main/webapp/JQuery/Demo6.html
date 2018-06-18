@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JQuery动画</title>
+<style>
+	div{
+		border:1px solid red;
+		width:200px;
+		height:200px;
+		background-color:#ccc;
+		/*自定义动画基于定位（相对，绝对，固定）*/
+		position:relative;
+	}
+	#d{
+		width:200px;
+		height:150px;
+		background-color:#ccc;
+		position:fixed;
+		top:50px;
+		right:-170px;
+	}
+</style>
+<script type="text/javascript" src="../JS/jquery-1.11.1.js"></script>
+<script>
+//显示与隐藏的动画原理:
+//采用定时器连续不断的修改元素的样式(大小、透明度)】
+//当前方法f2相当于主线程，启动的定时器相当于支线程，而者并发执行，所以先输出over,3s后动画才结束
+	//1
+	function f1(){
+		$("div:first").show(3000);
+	}
+	function f2(){
+		//参数2是函数，在动画完成时被调用
+		//像这样的在某件事完成后被自动调用的函数称为回调函数
+		$("div:first").hide(3000,function(){
+			console.log("over!");
+		});
+		console.log("over");
+	}
+	//2
+	function f3(){
+		$("div:eq(1)").slideDown(3000);
+	}
+	function f4(){
+		$("div:eq(1)").slideUp(3000,function(){
+			console.log("over!");
+		});
+	}
+	//3
+	function f5(){
+		$("div:eq(2)").fadeIn(3000);
+	}
+	function f6(){
+		$("div:eq(2)").fadeOut(3000,function(){
+			console.log("over!");
+		});
+	}
+	//自定义
+	$(function(){
+		$(":button:eq(6)").click(function(){
+			$("div:eq(3)").animate({"left":"20px"},2000);
+			//$("div:last").animate({"top":"30px"},3000); 	
+		});
+		$(":button:last").click(function(){
+			$("div:eq(3)").animate({"left":0},2000);
+		}); 
+		$("div:eq(4)").hover(function(){
+			$(this).animate({"left":"20px"},300);
+		},function(){
+			$(this).animate({"left":0},300);
+		});
+		//悬停
+		$("div:last").hover(function(){
+			$(this).animate({"right":0},300);
+		},function(){
+			$(this).animate({"right":"-170px"},300);
+		});
+	});
+	
+</script>
+</head>
+<body>
+	<div></div>
+	<input type="button" value="显示" onclick="f1();"/>
+	<input type="button" value="隐藏" onclick="f2();"/>
+	<div></div>
+	<input type="button" value="显示" onclick="f3();"/>
+	<input type="button" value="隐藏" onclick="f4();"/>
+	<div></div>
+	<input type="button" value="显示" onclick="f5();"/>
+	<input type="button" value="隐藏" onclick="f6();"/>
+	<div></div>
+	<input type="button" value="自定义动画"/>
+	<input type="button" value="取消"/>
+	<div></div>
+	<div id="d"></div>
+</body>
+</html>

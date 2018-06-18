@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JQuery操作DOM:读写/创建/插入/删除/遍历节点、样式操作</title>
+<style>
+	.big{
+		font-size:30px;
+	}
+	.important{
+		color:red;
+	}
+	.border{
+		border:1px solid red;
+	}
+</style>
+<script type="text/javascript" src="../JS/jquery-1.11.1.js"></script>
+<script>
+	$(function(){
+		//读写节点的内容
+		//html()==innerHTML;text()==innerText
+		console.log($("p:first").html());
+		console.log($("p:first").text());
+		$("p:first").html("JQuery支持<u>读写</u>节点");
+	//	$("p:first").text("JQuery支持<u>读写</u>节点");
+		//读写节点的值
+		console.log($(":button:first").val());
+		$(":button:first").val("2");
+		//读写节点属性
+		console.log($("img:first").attr("src"));
+		$("img:first").attr("src","../images/4.gif");
+	});
+	function f1(){
+		//创建节点
+		var li=$("<li>成都</li>");
+		var lis=$("<li>厦门</li>");
+		//追加
+		$("ul").append(li);
+		$("ul").prepend(lis);
+	}
+	function f2(){
+		var li=$("<li>重庆</li>");
+		var lis=$("<li>天津</li>");
+		//插入
+		$("#hz").after(li);
+		$("#hz").before(lis);
+	}
+	function f3(){
+		$("#hz").remove();
+	}
+	//根据层次查询节点
+	$(function(){
+	
+		//假设调用某方法，返回了这个节点
+		var li=$("#hz");
+		//获取父节点
+		console.log(li.parent());
+		//获取兄弟节点
+		console.log(li.next());
+		console.log(li.prev());
+		console.log(li.siblings());
+		//获取ul下内容包含”州“的li
+		console.log($("ul").find("li:contains('州')"));
+	});
+	//样式操作
+	$(function(){
+		$("p:last").addClass("big important");
+		//$("p:last").removeClass("big");
+		//$("p:last").removeClass();
+		console.log($("p:last").hasClass("big"));
+		setInterval(function(){
+			$("p:last").toggleClass("border");
+		},1000);
+	});
+</script>
+</head>
+<body>
+	<p>JQuery支持<b>读写</b>节点</p>
+	<p>JQuery支持<b>增删</b>节点</p>
+	<p>JQuery支持<b>查询</b>节点</p>
+	<p>
+	<input type="button" value="1"/>
+	</p>
+	<p>
+		<img alt="读写节点属性" src="../images/3.gif"/>
+	</p>
+
+	<ul>
+		<li>北京</li>
+		<li>上海</li>
+		<li>广州</li>
+		<li>深圳</li>
+		<li id="hz">杭州</li>
+		<li>西安</li>
+	</ul>
+	<input type="button" value="追加" onclick="f1();"/>
+	<input type="button" value="插入" onclick="f2();"/>
+	<input type="button" value="删除" onclick="f3();"/>
+	<p>JQuery支持对样式的操作</p>
+</body>
+</html>

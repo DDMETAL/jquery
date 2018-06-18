@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JQuery事件处理</title>
+<style>
+	.big{
+		width:360px;
+		height:320px;
+	}
+	#ad{
+		border:1px solid red;
+		height:500px;
+		background-color:#ccc;
+	}
+	#ad input{
+		float:right;
+		margin:10px;
+	}
+</style>
+<script type="text/javascript" src="../JS/jquery-1.11.1.js"></script>
+<script>
+	//window.onload在网页上只能写一次，若写多次则后者会覆盖前者
+	//$(functin(){})在网页上可以写多次，都有效，不会覆盖
+	$(function(){
+		//给按钮绑定单击事件
+		$(":button:first").click(function(e){
+			console.log("动态绑定事件");
+			f1();
+			console.log(e);
+		})
+		//给图片绑定hover事件
+		$("img").hover(
+			function(){
+				$(this).addClass("big");
+				//toggleClass("big");
+				//.width();
+				//css("width","360");
+			},//鼠标悬停时
+			function(){
+				$(this).removeClass("big");
+			}//鼠标离开时
+		);
+		//图片不断的在显示与隐藏之间切换
+		setInterval(function(){
+			$("img").toggle();
+		},2000);
+	//模拟单击事件
+		//给按钮绑定单击事件
+		$("#ad :button").click(function(){
+			$("#ad").slideUp(700);
+		});
+		//3s后自动点击按钮
+		setTimeout(function(){
+			$("#ad :button").trigger("click");
+		},3000);
+	});
+	function f1(){
+		console.log("f1");
+	}
+</script>
+</head>
+<body>
+	<p>
+		<input type="button" value="动态绑定事件"/>
+	</p>
+	<p>
+		<img alt="hover事件" src="../images/a.png">
+	</p>
+	<div id="ad">
+		<input type="button" value="x"/>
+	</div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JQuery选择器</title>
+<script type="text/javascript" src="../JS/jquery-1.11.1.js"></script>
+<script>
+	//等价于 window.onload=function(){}
+	$(function(){
+		//基本(元素)选择器
+		//层次选择器
+		console.log($("#hz+	"));
+		console.log($("#hz+ol p"));
+		console.log($("#hz+ol>li"));
+		console.log($("#hz~	"));
+		//过滤选择器(*)
+			//基本过滤
+			  	console.log($("li:first"));//的一个li
+			  	console.log($("li:last"));//最后一个li
+			  	console.log($("li:even"));//偶数行li
+			  	console.log($("li:odd"));//奇数行li
+			  	console.log($("li:lt(4)"));//下标小于4的li
+			  	console.log($("li:gt(4)"));//下标大于4的li
+			 	console.log($("li:eq(4)"));//下标等于4的li
+			 	console.log($("li:not(#hz)"));//排除#hz之外的li
+			//内容过滤
+				console.log($("li:contains('湖')"));
+			 	console.log($("p:empty"));
+			//可见性过滤
+				console.log($("li:hidden"));//选择隐藏的li
+				console.log($("li:visible"));//选择可见的li
+			//属性过滤
+				console.log($("li[id]"));//选择具有id属性的li
+				console.log($("li[id!=sz]"));//选择id属性!=sz的li
+			//状态过滤
+				console.log($("input:disabled"));//不可用
+				console.log($("input:enabled"));//可用
+				console.log($("input:checked"));//匹配选中的checkbox
+				console.log($("option:selected"));//匹配选中的option
+		//表单选择器--根据type属性筛选input
+			console.log($(":radio"));
+	});
+</script>
+</head>
+<body>
+	<ul>
+		<li>北京</li>
+		<li>上海</li>
+		<li>广州</li>
+		<li id="sz">深圳</li>
+		<li id="hz">杭州</li>
+		<ol>
+			<li>西湖
+				<p>雷峰塔</p>
+				<p></p>
+			</li>
+			<li>千岛湖</li>
+		</ol>	
+		<li>西安</li>
+		<li>成都</li>
+		<li style="display:none">重庆</li>
+	</ul>
+	<p>	
+		<!-- readonly:只读，框中的值可以提交给服务器
+			 disabled:禁用，框中的值无法提交给服务器 -->
+		账号：<input type="text" disabled/>
+	</p>
+	<p>
+		密码：<input type="password"/>
+	</p>
+	<p>
+		性别：
+		<input type="radio" name="sex" checked/>男
+		<input type="radio" name="sex" />女
+	</p>
+	<p>
+		地址：
+		<select>
+			<option>请选择</option>
+			<option>西安</option>
+			<option>杭州</option>
+		</select>
+	</p>
+</body>
+</html>

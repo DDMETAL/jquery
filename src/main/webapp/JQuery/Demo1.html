@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JQuery</title>
+<script type="text/javascript" src="../JS/jquery-1.11.1.js"></script>
+<script>
+	function bigger(){
+		//获取段落原来的字号(如16px)
+		var size=$("p").css("font-size");
+		//去掉单位以便于计算
+		size=size.replace("px","");
+		//将size+1后再将字号设置给所有段落
+		$("p").css("font-size",++size+"px");
+	}
+</script>
+</head>
+<body>
+	<p>JQuery是轻量级的js框架</p>
+	<p>它提供了简介一致的API</p>
+	<p>它能极大程度的提高js编程效率</p>
+	<input type="button" value="+" onclick="bigger();"/>
+	
+</body>
+</html>

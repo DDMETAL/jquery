@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JQuery对象</title>
+<script type="text/javascript" src="../JS/jquery-1.11.1.js"></script>
+<script>
+	function print(){
+		var ps=$("p");
+		console.log(ps);
+		for(var i=0;i<ps.length;i++){
+			//JQuery转成DOM
+			console.log(ps[i].innerHTML);
+		}
+	}
+	function change(img){
+		if($(img).width()==720){
+			//DOM转成JQuery
+			$(img).width(360).height(320);
+		}else{
+			$(img).width(720).height(640); 
+		}
+	}
+</script>
+</head>
+<body>
+	<p>JQuery对象本质上就是DOM数组</p>
+	<p>JQuery对象才能调用JQuery的API</p>
+	<p>DOM对象才能调用DOM的API</p>
+	<input type="button" value="打印" onclick="print();"/>
+	<div>
+	<img alt="点击图片变大/变小" src="../images/1.jpg" onclick="change(this);">
+	<img alt="点击图片变大/变小" src="../images/2.jpg" onclick="change(this);">
+	</div> 
+</body>
+</html>
